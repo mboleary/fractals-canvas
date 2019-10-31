@@ -4,6 +4,14 @@ let canvas = document.getElementById("canvas");
 let width = 0;
 let height = 0;
 
+let redslider = null;
+let greenslider = null;
+let blueslider = null;
+
+let red = 0;
+let green = 0;
+let blue = 0;
+
 const MAX_ITER = 1000;
 
 // function draw() {
@@ -65,6 +73,9 @@ function initDraw() {
     canvas = document.getElementById("canvas");
     canvas.setAttribute("width", width);//Set the Canvas size to the native screen resolution
     canvas.setAttribute("height", height);
+    redslider = document.getElementById("red");
+    greenslider = document.getElementById("green");
+    blueslider = document.getElementById("blue");
 }
 
 function initControls() {
@@ -109,6 +120,9 @@ function aniMandelbrot() {
     const ms = 100;
     let stop = document.querySelector("[for=mandelbrot] #maxiter").value;
     let i = init;
+    red = redslider.value;
+    green = greenslider.value;
+    blue = blueslider.value;
     let interval = setInterval(() => {
         if (i > stop) {
             clearInterval(interval);
@@ -123,7 +137,10 @@ function aniMandelbrot() {
 // Draw Mandelbrot using values from control panel
 function cpDrawMandelbrot() {
     let maxiter = document.querySelector("[for=mandelbrot] #maxiter").value;
-    console.log("Max Iter:", maxiter)
+    console.log("Max Iter:", maxiter);
+    red = redslider.value;
+    green = greenslider.value;
+    blue = blueslider.value;
     drawMandelbrot(maxiter);
 }
 
@@ -169,10 +186,8 @@ function calcAndInsertColors(iter, maxiter, arrpos, imgdata) {
     imgdata.data[arrpos + 3] = 255; // ALPHA
 }
 
+
 function calcAndInsertColorsLinear(iter, maxiter, arrpos, imgdata) {
-    let red = document.getElementById("red").value;
-    let green = document.getElementById("green").value;
-    let blue = document.getElementById("blue").value;
     imgdata.data[arrpos] = (iter/maxiter) * red; // RED
     imgdata.data[arrpos + 1] = (iter/maxiter) * green; // GREEN
     imgdata.data[arrpos + 2] = (iter/maxiter) * blue; // BLUE
