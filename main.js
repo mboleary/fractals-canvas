@@ -172,9 +172,6 @@ function initMandelbrot() {
     let maxiter = document.querySelector("[for=mandelbrot] #maxiter");
     maxiter.setAttribute("max", MAX_ITER);
     maxiter.setAttribute("min", 0);
-    let zoom = document.querySelector("[for=mandelbrot] #zoom");
-    zoom.setAttribute("max", 10.0);
-    zoom.setAttribute("min", 1.0);
 }
 
 function enablePointSelect() {
