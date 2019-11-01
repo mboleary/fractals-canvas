@@ -14,20 +14,55 @@
                     <h2> Mandelbrot Controls </h2>
                     <label> Max Iteration </label>
                     <input type="range" id="maxiter">
-                    
                     <input type="button" onclick="cpDrawMandelbrot()" value="Redraw">
                     <input type="button" onclick="aniMandelbrot()" value="Animate!">
                 </div>
             </div>
-            <div class="controlGroup">
-                <h2> Color Controls </h2>
-                <p> Linear </p>
-                <label>Red</label> 
-                <input type="range" id="red">
-                <label>Green</label> 
-                <input type="range" id="green">
-                <label>Blue</label> 
-                <input type="range" id="blue">
+            <div id="colorPanel">
+                <!-- <div class="controlGroup" for="linear">
+                    <h2> Color Controls </h2>
+                    <p> Linear </p>
+                    <label>Red</label> 
+                    <input type="range" id="red">
+                    <label>Green</label> 
+                    <input type="range" id="green">
+                    <label>Blue</label> 
+                    <input type="range" id="blue">
+                </div> -->
+                <div class="controlGroup" for="transform">
+                    <h2> Color Controls </h2>
+                    <p> Transform </p>
+                    <label>Red</label> 
+                    <div class="row">
+                        <input type="checkbox" id="tr_red_i" value="false" title="Invert">
+                        <input type="radio" id="tr_red_sin" name="red_transform" value="sin" title="Sin">
+                        <input type="radio" id="tr_red_cos" name="red_transform" value="cos" title="Cos">
+                        <input type="radio" id="tr_red_sqrt" name="red_transform" value="sqrt" title="Square Root">
+                        <input type="radio" id="tr_red_sqrd" name="red_transform" value="sqrd" title="Square">
+                        <input type="radio" id="tr_red_lin" name="red_transform" value="lin" title="Linear">
+                        <input type="range" id="red">
+                    </div>
+                    <label>Green</label> 
+                    <div class="row">
+                        <input type="checkbox" id="tr_green_i" value="false" title="Invert">
+                        <input type="radio" id="tr_green_sin" name="green_transform" value="sin" title="Sin">
+                        <input type="radio" id="tr_green_cos" name="green_transform" value="cos" title="Cos">
+                        <input type="radio" id="tr_green_sqrt" name="green_transform" value="sqrt" title="Square Root">
+                        <input type="radio" id="tr_green_sqrd" name="green_transform" value="sqrd" title="Square">
+                        <input type="radio" id="tr_green_lin" name="green_transform" value="lin" title="Linear">
+                        <input type="range" id="green">
+                    </div>
+                    <label>Blue</label> 
+                    <div class="row">
+                        <input type="checkbox" id="tr_blue_i" value="false" title="Invert">
+                        <input type="radio" id="tr_blue_sin" name="blue_transform" value="sin" title="Sin">
+                        <input type="radio" id="tr_blue_cos" name="blue_transform" value="cos" title="Cos">
+                        <input type="radio" id="tr_blue_sqrt" name="blue_transform" value="sqrt" title="Square Root">
+                        <input type="radio" id="tr_blue_sqrd" name="blue_transform" value="sqrd" title="Square">
+                        <input type="radio" id="tr_blue_lin" name="blue_transform" value="lin" title="Linear">
+                        <input type="range" id="blue">
+                    </div>
+                </div>
             </div>
             <div class="details">
                 <p> Created by Brady O'Leary in 2019 </p>

@@ -78,3 +78,22 @@ input {
 .details a, .details a:hover, .details a:visited {
     color: #333;
 }
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+.row input[type="radio"] {
+    flex: 0 1 auto;
+    width: 1em;
+}
+
+.row input[type="checkbox"] {
+    flex: 0 1 auto;
+    width: 1em;
+}
+
+.row input[type="range"] {
+    flex: 0 1 auto;
+}
