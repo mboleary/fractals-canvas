@@ -10,4 +10,5 @@ Future:
     [ ] Refactor the code to make it more modular
     [ ] Implement Other Coloring algorithms
     [ ] Fully implement the Color Control Panel (Linear, Transform, etc...)
+    [ ] Look into adding the ability to adjust the power of the Mandelbrot Set (https://en.wikipedia.org/wiki/File:Mandelbrot_Set_Animation_1280x720.gif)
     [ ] Add https://en.wikipedia.org/wiki/Tricorn_(mathematics)
