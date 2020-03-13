@@ -293,7 +293,7 @@ function drawMandelbrotWithWorkers() {
     
     const imgdata = ctx.getImageData(0, 0, width, height);
 
-    const numWorkers = 190; // Don't have too many, or we'll run out of RAM!
+    const numWorkers = 64; // Don't have too many, or we'll run out of RAM!
 
     
     // WebWorkers https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers

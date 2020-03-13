@@ -2,6 +2,8 @@
 
 const MAX_ITER = 1000;
 
+const int16 = Math.pow(2, 16);
+
 onconnect = function(e) {
     const port = e.ports[0];
 
@@ -12,10 +14,6 @@ onconnect = function(e) {
         let endY = e.data.endY;
         let width = e.data.width;
         let height = e.data.height;
-
-        let tempR = 255;
-        let tempG = 255;
-        let tempB = 255;
 
         let retArr = [];
 
@@ -35,9 +33,13 @@ onconnect = function(e) {
                 let arrpos = (px + (py * width)) * 4;
                 // console.log(arrpos);
                 // Mult Value was 255
-                retArr[arrpos] = (iter/MAX_ITER) * tempR; // RED
-                retArr[arrpos + 1] = (iter/MAX_ITER) * tempG; // GREEN
-                retArr[arrpos + 2] = (iter/MAX_ITER) * tempB; // BLUE
+                let tempColVal = (iter/MAX_ITER) * int16;
+                retArr[arrpos + 0] = (((tempColVal >> 11) % 32) / 32) * 255; // BLUE 5
+                retArr[arrpos + 1] = (((tempColVal >> 5) % 64) / 64) * 255; // GREEN 6
+                retArr[arrpos + 2] = ((tempColVal % 32) / 32) * 255; // RED 5
+                // retArr[arrpos] = (iter/MAX_ITER) * tempR; // RED
+                // retArr[arrpos + 1] = (iter/MAX_ITER) * tempG; // GREEN
+                // retArr[arrpos + 2] = (iter/MAX_ITER) * tempB; // BLUE
                 retArr[arrpos + 3] = 255; // ALPHA
             }
         }
