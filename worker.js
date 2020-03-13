@@ -13,6 +13,10 @@ onconnect = function(e) {
         let width = e.data.width;
         let height = e.data.height;
 
+        let tempR = 255;
+        let tempG = 255;
+        let tempB = 255;
+
         let retArr = [];
 
         for (let px = startX;px < endX; px++) {
@@ -30,9 +34,10 @@ onconnect = function(e) {
                 }
                 let arrpos = (px + (py * width)) * 4;
                 // console.log(arrpos);
-                retArr[arrpos] = (iter/MAX_ITER) * 255; // RED
-                retArr[arrpos + 1] = (iter/MAX_ITER) * 255; // GREEN
-                retArr[arrpos + 2] = (iter/MAX_ITER) * 255; // BLUE
+                // Mult Value was 255
+                retArr[arrpos] = (iter/MAX_ITER) * tempR; // RED
+                retArr[arrpos + 1] = (iter/MAX_ITER) * tempG; // GREEN
+                retArr[arrpos + 2] = (iter/MAX_ITER) * tempB; // BLUE
                 retArr[arrpos + 3] = 255; // ALPHA
             }
         }

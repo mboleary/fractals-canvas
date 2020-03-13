@@ -79,6 +79,8 @@ function init() {
 function initDraw() {
     width = window.screen.width;
     height = window.screen.height;
+    // width = 400;
+    // height = 300;
     canvas = document.getElementById("canvas");
     canvas.setAttribute("width", width);//Set the Canvas size to the native screen resolution
     canvas.setAttribute("height", height);
@@ -291,7 +293,7 @@ function drawMandelbrotWithWorkers() {
     
     const imgdata = ctx.getImageData(0, 0, width, height);
 
-    const numWorkers = 32; // Don't have too many, or we'll run out of RAM!
+    const numWorkers = 190; // Don't have too many, or we'll run out of RAM!
 
     
     // WebWorkers https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers
@@ -322,9 +324,9 @@ function drawMandelbrotWithWorkers() {
 
         let message = {
             startX: 0,
-            startY: (height / numWorkers) * i,
+            startY: Math.round(height / numWorkers) * i,
             endX: width,
-            endY: (height / numWorkers) * (i + 1),
+            endY: Math.round(height / numWorkers) * (i + 1),
             width: width,
             height: height
         }
