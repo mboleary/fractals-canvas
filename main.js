@@ -66,10 +66,11 @@ const MAX_ITER = 1000;
 
 function init() {
     initDraw();
-    initTransformColorControls();
-    initControls();
-    initMandelbrot();
-    drawMandelbrot(MAX_ITER);
+    // initTransformColorControls();
+    // initControls();
+    // initMandelbrot();
+    // drawMandelbrot(MAX_ITER);
+    drawMandelbrotWithWorkers();
 }
 
 /**
@@ -78,6 +79,8 @@ function init() {
 function initDraw() {
     width = window.screen.width;
     height = window.screen.height;
+    // width = 400;
+    // height = 300;
     canvas = document.getElementById("canvas");
     canvas.setAttribute("width", width);//Set the Canvas size to the native screen resolution
     canvas.setAttribute("height", height);
@@ -282,4 +285,60 @@ function calcAndInsertColorsTransform(iter, maxiter, arrpos, imgdata) {
         imgdata.data[arrpos + 2] = tr_blue_f(iter/maxiter) * blue; // BLUE
     }
     imgdata.data[arrpos + 3] = 255; // ALPHA
+}
+
+function drawMandelbrotWithWorkers() {
+    const ctx = canvas.getContext("2d"); //Drawing is rendered Here!
+    ctx.fillRect(0, 0, width, height);
+    
+    const imgdata = ctx.getImageData(0, 0, width, height);
+
+    const numWorkers = 64; // Don't have too many, or we'll run out of RAM!
+
+    
+    // WebWorkers https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers
+
+    // let worker = new SharedWorker('worker.js');
+
+    // let message = {
+    //     startX: 0,
+    //     startY: 0,
+    //     endX: width,
+    //     endY: height,
+    //     width: width,
+    //     height: height
+    // }
+
+    // console.log("Started Render");
+    
+    // worker.port.postMessage(message);
+
+    // worker.port.onmessage = function(e) {
+    //     console.log("Returned Data");
+    //     Object.assign(imgdata.data, e.data);
+    //     ctx.putImageData(imgdata, 0, 0);
+    // }
+
+    for (let i = 0; i < numWorkers; i++) {
+        let worker = new SharedWorker('worker.js');
+
+        let message = {
+            startX: 0,
+            startY: Math.round(height / numWorkers) * i,
+            endX: width,
+            endY: Math.round(height / numWorkers) * (i + 1),
+            width: width,
+            height: height
+        }
+
+        console.log("Started Render:", message);
+        
+        worker.port.postMessage(message);
+
+        worker.port.onmessage = function(e) {
+            console.log("Returned Data");
+            Object.assign(imgdata.data, e.data);
+            ctx.putImageData(imgdata, 0, 0);
+        }
+    }
 }
